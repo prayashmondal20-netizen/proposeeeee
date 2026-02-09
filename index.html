@@ -3,221 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Pratyusha ❤️</title>
+    <title>For My Pratyusha 🧸💓🧿</title>
     <style>
-        :root {
-            --cadbury-purple: #380885;
-            --cadbury-gold: #e6be7e;
-            --milk-chocolate: #4b2c20;
-            --velvet-maroon: #5d001e;
-        }
+        :root { --main-pink: #ff4d6d; --soft-pink: #fff0f3; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            background: radial-gradient(circle, #2c000e 0%, #000000 100%);
-            font-family: 'Georgia', serif;
-            display: flex; justify-content: center; align-items: center;
-            overflow: hidden; color: white; touch-action: manipulation;
+        body { 
+            background: var(--soft-pink); 
+            font-family: 'Georgia', serif; 
+            text-align: center; 
+            margin: 0; 
+            overflow: hidden; 
+            color: #5a3e3e;
+            height: 100vh;
+            width: 100vw;
         }
-
-        /* Visible Floating Background Icons */
-        .bg-icon {
+        
+        /* Floating Elements Layer */
+        .floating-container { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+        .float-item { 
             position: absolute; 
-            color: rgba(255, 255, 255, 0.4); /* Increased visibility */
-            font-size: 24px; z-index: -1; 
-            animation: bgFloat 10s linear infinite;
-            pointer-events: none;
+            bottom: -100px; 
+            opacity: 0; 
+            animation: floatUp 7s linear infinite; 
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.8));
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
         }
 
-        @keyframes bgFloat {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
+        .screen { 
+            position: fixed; inset: 0; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            padding: 20px; z-index: 10; 
+            background: var(--soft-pink);
         }
-
-        .page {
-            display: none; flex-direction: column; align-items: center;
-            text-align: center; width: 88%; max-width: 320px;
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        .active { display: flex; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* --- Security Page --- */
-        #security-page { 
-            background: rgba(255, 255, 255, 0.98); padding: 30px 20px; border-radius: 25px; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); color: var(--velvet-maroon);
-        }
+        .hidden { display: none !important; }
+        
         input { 
-            padding: 12px; border: 2px solid #eee; border-radius: 50px; 
-            width: 85%; text-align: center; margin: 20px 0; outline: none; 
-            font-size: 18px; letter-spacing: 4px; background: #f9f9f9; color: var(--velvet-maroon);
-        }
-
-        /* --- Chocolate Page --- */
-        .wrapper { 
-            background: var(--cadbury-purple); padding: 15px 10px; border-radius: 12px; 
-            border: 1.5px solid var(--cadbury-gold); width: 100%;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-        }
-        .brand { color: var(--cadbury-gold); font-size: 1rem; font-weight: bold; margin-bottom: 12px; font-style: italic; }
-        .foil-tray { background: linear-gradient(135deg, #d1d1d1, #777); padding: 8px; border-radius: 6px; }
-        .bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; background: #23110b; padding: 6px; }
-        .slice { 
-            height: 70px; background: var(--milk-chocolate); border-radius: 5px; 
-            display: flex; justify-content: center; align-items: center; 
-            box-shadow: inset 2px 2px 4px rgba(255,255,255,0.1), 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .slice span { color: rgba(255,255,255,0.08); font-weight: bold; font-size: 9px; }
-        
-        /* Slow Chocolate Eating Animation */
-        .eating-anim { animation: slowCrunch 0.9s ease-in forwards; }
-        
-        @keyframes slowCrunch { 
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05) rotate(3deg); }
-            100% { transform: scale(0); opacity: 0; filter: blur(5px); } 
-        }
-
-        /* --- Message Page --- */
-        #message-page {
-            background: var(--velvet-maroon); padding: 22px; border-radius: 20px;
-            border: 2px solid var(--cadbury-gold); box-shadow: 0 0 40px rgba(214, 48, 49, 0.5);
-        }
-        .note-body {
-            font-size: 0.85rem; line-height: 1.5; font-style: italic;
-            background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; text-align: left;
-        }
-
-        .btn-gold { 
-            background: var(--cadbury-gold); color: var(--cadbury-purple); 
-            border: none; padding: 14px 32px; border-radius: 50px; 
-            cursor: pointer; font-weight: bold; margin-top: 15px; font-size: 0.9rem;
+            padding: 15px; border-radius: 15px; border: 2px solid #ffb3c1; 
+            text-align: center; margin-bottom: 15px; width: 85%; 
+            max-width: 280px; font-size: 18px; outline: none; background: white;
         }
         
-        .pop-emoji { 
-            position: absolute; pointer-events: none; z-index: 100; 
-            animation: floatUp 1.2s ease-out forwards; font-size: 2.8rem; 
+        button { 
+            background: var(--main-pink); color: white; border: none; 
+            padding: 15px 35px; border-radius: 50px; cursor: pointer; 
+            font-size: 1.1rem; font-weight: bold; width: 85%; max-width: 280px;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
         }
-        @keyframes floatUp { 
-            0% { opacity: 1; transform: translateY(0) scale(0.5); }
-            100% { opacity: 0; transform: translateY(-140px) scale(1.3); } 
+
+        .box-grid { 
+            display: grid; grid-template-columns: repeat(3, 1fr); 
+            gap: 12px; margin: 25px auto; 
+            width: 90%; max-width: 320px;
         }
+        .box { 
+            aspect-ratio: 1/1; background: #ffb3c1; border-radius: 18px; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 2.2rem; box-shadow: 0 5px 12px rgba(0,0,0,0.1); 
+        }
+        
+        .shake-it { animation: shake 0.4s infinite; background: white !important; border: 3px solid var(--main-pink); }
+        @keyframes shake { 0%, 100% { transform: scale(1.1); } 50% { transform: scale(1.1) rotate(8deg); } }
+        
+        #teddy-pop { font-size: 100px; position: absolute; z-index: 100; display: none; }
+        .pop-active { display: block !important; animation: popScale 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popScale { from { transform: scale(0); } to { transform: scale(1.6); } }
+
+        #scr-final { overflow-y: scroll; display: none; -webkit-overflow-scrolling: touch; padding: 40px 0; }
+        .love-card { 
+            width: 90%; max-width: 450px; padding: 30px; 
+            border-radius: 25px; background: white; 
+            box-shadow: 0 15px 45px rgba(255, 77, 109, 0.25); 
+            margin: 0 auto; text-align: left; 
+        }
+        .fade-in { animation: fadeIn 3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .letter-content { line-height: 1.8; font-size: 1.05rem; color: #444; white-space: pre-line; }
+        .signature { margin-top: 25px; font-weight: bold; color: var(--main-pink); text-align: right; font-size: 1.1rem; }
     </style>
 </head>
 <body>
 
-    <audio id="crunchSound" src="https://assets.mixkit.co/active_storage/sfx/2305/2305-preview.mp3"></audio>
+    <div class="floating-container" id="bg"></div>
 
-    <div id="security-page" class="page active">
-        <h2>🔒 Private Access</h2>
-        <input type="password" id="passInput" placeholder="••••••" inputmode="numeric">
-        <button class="btn-gold" onclick="checkPass()">Unlock ❤️</button>
+    <div id="scr-pass" class="screen">
+        <h2 style="color: var(--main-pink); margin-bottom: 20px;">🔒 Private Message</h2>
+        <input type="password" id="passInput" placeholder="Enter password" inputmode="numeric">
+        <button onclick="checkPass()">Unlock</button>
     </div>
 
-    <div id="teaser-page" class="page">
-        <h1 style="color: white; text-shadow: 0 0 10px var(--cadbury-gold); font-size: 1.2rem;">
-            I HAVE PREPARED SOMETHING FOR U 🤭😅
-        </h1>
-        <button class="btn-gold" style="background: white;" onclick="nextPage('teaser-page', 'chocolate-page')">CONTINUE 🫶🏻</button>
+    <div id="scr-intro" class="screen hidden">
+        <h1 style="color: var(--main-pink); line-height: 1.3;">I have prepared something for u .❤️.</h1>
+        <p style="font-size: 1.2rem;">Let's play the game 🧸💓</p>
+        <button onclick="showGame()">Continue</button>
     </div>
 
-    <div id="chocolate-page" class="page">
-        <div class="wrapper">
-            <div class="brand">Pratyusha's Special 🍫</div>
-            <div class="foil-tray">
-                <div class="bar">
-                    <div class="slice"><span>LOVE</span></div>
-                    <div class="slice"><span>LOVE</span></div>
-                    <div class="slice"><span>LOVE</span></div>
-                    <div class="slice"><span>LOVE</span></div>
-                    <div class="slice"><span>LOVE</span></div>
-                    <div class="slice"><span>LOVE</span></div>
-                </div>
+    <div id="scr-game" class="screen hidden">
+        <h2 style="color: var(--main-pink);">Find Your Teddy!</h2>
+        <p id="status" style="font-weight: bold;">Which gift box? 🎁</p>
+        <div class="box-grid">
+            <script>for(let i=0; i<9; i++) document.write(`<div class="box" onclick="play(this, ${i})">🎁</div>`);</script>
+        </div>
+        <div id="teddy-pop">🧸</div>
+    </div>
+
+    <div id="scr-final" class="screen">
+        <div class="love-card fade-in">
+            <h2 style="color: var(--main-pink); text-align: center; margin-bottom: 20px;">You Are My Tedddyyyy 🧿🫶🏻😀</h2>
+            <div class="letter-content">
+Happy Teddy Day, my love 🧸❤️
+My Pratyusha 💓...
+
+Today is Teddy Day, but honestly, every time I think of a teddy, I think of you. A teddy is warm, gentle, and full of love — just like the way you make me feel. Your love wraps around my heart the same way a teddy wraps someone in comfort.
+
+If I could, I would place a teddy in your arms that carries my heartbeat inside it, so every hug reminds you how deeply I love you. I want you to feel my presence even when I’m not beside you. Just like a teddy never leaves your side at night, my love will stay with you in every moment — through smiles, tears, and silent thoughts.
+
+You are not just someone I love; you are someone I choose every day. Your smile is my favorite view, your voice is my favorite sound, and your love is my greatest blessing. You make my world softer, warmer, and more beautiful just by being in it.
+
+So on this Teddy Day, remember this: hold your teddy close, but know that my heart is holding you even closer.
+I am your teddy. Soft for you, strong for you, and always yours. 🧸❤️
+
+<div class="signature">
+Always yours, always in love. 🧸💖
+My love 💓🧿🧸
+</div>
             </div>
         </div>
-        <button class="btn-gold" id="eatBtn" onclick="startEating()">Eat Chocolate ❤️</button>
-    </div>
-
-    <div id="message-page" class="page">
-        <div style="color: var(--cadbury-gold); font-size: 0.9rem; font-weight: bold; margin-bottom: 12px;">HAPPY CHOCOLATE DAY MY PRATYUSHA 🫶🏻🧿</div>
-        <div class="note-body">
-            Just like Chocolate, You make My life sweeter in ways I can’t explain.<br><br>
-            Every smile of yours melts my worries,<br>
-            Every word of yours feels like comfort,<br>
-            Every glance, Every thought of yours gives me peace...<br><br>
-            If love had a flavor, it would taste like <b>"You"</b>.<br><br>
-            Today, tomorrow, always…<br>
-            You’re my favorite sweetness, my one and only Pratyusha.
-            <div style="font-size: 18px; margin-top: 12px; text-align: center; letter-spacing: 5px;">🧿🧿🧿🧿🧿</div>
-        </div>
-        <button class="btn-gold" onclick="location.reload()">Refill Love 🔄</button>
     </div>
 
     <script>
-        // Visible Background Icons (Hearts and Chocolates)
-        function initBg() {
-            const icons = ['💓', '🍫', '🍫', '💓', '💓', '🍫']; 
-            for(let i=0; i<25; i++) { // Increased density
-                let div = document.createElement('div');
-                div.className = 'bg-icon';
-                div.innerHTML = icons[Math.floor(Math.random()*icons.length)];
-                div.style.left = Math.random() * 100 + 'vw';
-                div.style.animationDuration = (Math.random() * 5 + 7) + 's';
-                div.style.animationDelay = (Math.random() * 8) + 's';
-                document.body.appendChild(div);
-            }
+        const winIdx = Math.floor(Math.random() * 9);
+        const bg = document.getElementById('bg');
+        const icons = ['💓', '🧿', '🧸'];
+
+        for (let i = 0; i < 20; i++) {
+            let item = document.createElement('div');
+            item.className = 'float-item';
+            item.innerText = icons[Math.floor(Math.random() * icons.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDelay = (Math.random() * 7) + 's';
+            bg.appendChild(item);
         }
-        initBg();
 
         function checkPass() {
-            if(document.getElementById('passInput').value === '120805') {
-                nextPage('security-page', 'teaser-page');
+            if(document.getElementById('passInput').value === "120805") {
+                document.getElementById('scr-pass').classList.add('hidden');
+                document.getElementById('scr-intro').classList.remove('hidden');
+            } else { alert("Wrong password! ❌"); }
+        }
+
+        function showGame() {
+            document.getElementById('scr-intro').classList.add('hidden');
+            document.getElementById('scr-game').classList.remove('hidden');
+        }
+
+        function play(el, idx) {
+            if(idx === winIdx) {
+                el.innerHTML = "🧸";
+                el.classList.add('shake-it');
+                document.getElementById('teddy-pop').classList.add('pop-active');
+                setTimeout(() => {
+                    document.getElementById('scr-game').classList.add('hidden');
+                    document.getElementById('scr-final').style.display = 'block';
+                    document.body.style.overflowY = "auto";
+                }, 2800);
             } else {
-                alert("Incorrect Password! 🧿");
+                el.innerHTML = "❌"; el.style.opacity = '0.3';
             }
-        }
-
-        function nextPage(curr, next) {
-            document.getElementById(curr).classList.remove('active');
-            document.getElementById(next).classList.add('active');
-        }
-
-        function spawnPop(x, y, emoji) {
-            const el = document.createElement('div');
-            el.innerHTML = emoji;
-            el.className = 'pop-emoji';
-            el.style.left = x + 'px'; el.style.top = y + 'px';
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 1200);
-        }
-
-        async function startEating() {
-            const slices = document.querySelectorAll('.slice');
-            const emojis = ['💓', '🧿', '✨', '♾️', '💓', '🫶🏻'];
-            const sound = document.getElementById('crunchSound');
-            
-            document.getElementById('eatBtn').style.visibility = 'hidden';
-
-            for (let i = 0; i < slices.length; i++) {
-                // Slower eating logic (900ms delay)
-                await new Promise(r => setTimeout(r, 900)); 
-                
-                sound.currentTime = 0;
-                sound.play().catch(() => {});
-                
-                const rect = slices[i].getBoundingClientRect();
-                spawnPop(rect.left + rect.width/4, rect.top, emojis[i]);
-                slices[i].classList.add('eating-anim');
-            }
-
-            setTimeout(() => { nextPage('chocolate-page', 'message-page'); }, 1200);
         }
     </script>
 </body>
